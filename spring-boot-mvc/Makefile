@@ -1,3 +1,6 @@
+include .env
+export
+
 .PHONY: build run hello hello-post create-user create-user-bad get-user health metrics info dev
 
 build:
@@ -7,6 +10,9 @@ run:
 	mvn spring-boot:run
 
 hello:
+	curl http://localhost:8080/ -H "api-key: $(API_KEY)"
+
+hello-bad:
 	curl http://localhost:8080/
 
 hello-post:
