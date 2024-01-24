@@ -1,4 +1,4 @@
-.PHONY: build run
+.PHONY: build run hello hello-post create-user create-user-bad get-user health metrics info dev
 
 build:
 	mvn clean install
@@ -20,5 +20,14 @@ create-user-bad:
 
 get-user:
 	curl http://localhost:8080/users/1
+
+health:
+	curl http://localhost:8080/manage/health
+
+metrics:
+	curl http://localhost:8080/manage/metrics
+
+info:
+	curl http://localhost:8080/manage/info
 
 dev: build run
