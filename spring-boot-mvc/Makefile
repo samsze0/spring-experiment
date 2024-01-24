@@ -30,4 +30,7 @@ metrics:
 info:
 	curl http://localhost:8080/manage/info
 
+evil:
+	curl http://localhost:8080/evil
+
 dev: build run

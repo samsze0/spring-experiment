@@ -17,5 +17,4 @@ public class HelloController {
     public String helloThere(@RequestParam String name) {
         return String.format("Hello there, %s!", name);
     }
-
 }
