@@ -12,6 +12,7 @@ services:
       - DATABASE_NAME=${DB_NAME}
       - DATABASE_USER=${DB_USER}
       - DATABASE_PASSWORD=${DB_PASSWORD}
+      - API_KEY=${API_KEY}
 
   db:
     image: mysql:5.7

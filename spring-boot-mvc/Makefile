@@ -1,13 +1,26 @@
 include .env
 export
 
-.PHONY: build run hello hello-post create-user create-user-bad get-user health metrics info dev
+.PHONY: build run hello hello-post create-user create-user-bad get-user health metrics info dev dev-no-docker build-no-docker run-no-docker
+
+IMAGE_NAME=spring-boot-mvc
 
 build:
 	mvn clean install
+	docker build -t $(IMAGE_NAME) .
+
+build-no-docker:
+	mvn clean install
 
 run:
+	docker compose up
+
+run-no-docker:
 	mvn spring-boot:run
+
+dev: build run
+
+dev-no-docker: build-no-docker run-no-docker
 
 hello:
 	curl http://localhost:8080/ -H "api-key: $(API_KEY)"
@@ -38,5 +51,3 @@ info:
 
 evil:
 	curl http://localhost:8080/evil
-
-dev: build run
