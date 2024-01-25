@@ -9,8 +9,11 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class ExampleSpringBootApplication {
 
   public static void main(String[] args) {
-    Dotenv dotenv = Dotenv.load();
-    System.setProperty("API_KEY", dotenv.get("API_KEY"));
+    if (System.getenv("ENV") != null && System.getenv("ENV").equals("prod")) {
+    } else {
+      Dotenv dotenv = Dotenv.load();
+      System.setProperty("API_KEY", dotenv.get("API_KEY"));
+    }
     SpringApplication.run(ExampleSpringBootApplication.class, args);
   }
 

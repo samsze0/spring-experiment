@@ -1,7 +1,7 @@
 version: '3.1'
 
 services:
-  my-app:
+  spring:
     image: spring-boot-mvc:latest
     ports:
       - 8080:8080
@@ -13,14 +13,17 @@ services:
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - API_KEY=${API_KEY}
+      - ENV=prod
+    command: ["./wait-for-it.sh", "db", "${DB_PASSWORD}", "java", "-jar", "/your/spring/boot/app.jar"]
 
   db:
     image: mysql:8.0
     restart: always
     environment:
       MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${DB_USER}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - 3306:3306
     volumes:
       - db_data:/var/lib/mysql
 

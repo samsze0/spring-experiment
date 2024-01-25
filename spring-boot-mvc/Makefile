@@ -18,7 +18,7 @@ run:
 run-no-docker:
 	mvn spring-boot:run
 
-dev: build run
+dev: build run # TODO: bind volume so that auto-reload works
 
 dev-no-docker: build-no-docker run-no-docker
 
