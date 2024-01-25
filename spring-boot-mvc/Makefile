@@ -29,16 +29,19 @@ hello-bad:
 	curl http://localhost:8080/
 
 hello-post:
-	curl -X POST http://localhost:8080?name=John
+	curl -X POST http://localhost:8080?name=John -H "api-key: $(API_KEY)"
 
 create-user:
-	curl -X POST -H "Content-Type: application/json" -d '{"name":"John Doe"}' http://localhost:8080/users
+	curl -X POST -H "Content-Type: application/json" -d '{"name":"$(NAME)", "age": "$(AGE)"}' http://localhost:8080/users -H "api-key: $(API_KEY)"
 
 create-user-bad:
-	curl -X POST -H "Content-Type: application/json" -d '{"name":"J"}' http://localhost:8080/users
+	curl -X POST -H "Content-Type: application/json" -d '{"name":"J"}' http://localhost:8080/users -H "api-key: $(API_KEY)"
 
 get-user:
-	curl http://localhost:8080/users/1
+	curl http://localhost:8080/users/$(NAME) -H "api-key: $(API_KEY)"
+
+get-users:
+	curl http://localhost:8080/users -H "api-key: $(API_KEY)"
 
 health:
 	curl http://localhost:8080/manage/health
@@ -50,4 +53,4 @@ info:
 	curl http://localhost:8080/manage/info
 
 evil:
-	curl http://localhost:8080/evil
+	curl http://localhost:8080/evil -H "api-key: $(API_KEY)"

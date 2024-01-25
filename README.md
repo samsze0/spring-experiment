@@ -8,3 +8,5 @@ Dependencies:
 - maven
 - docker
 - java
+
+Docker is optional. If you don't have docker, you can run the application locally by running `make *-no-docker`. But this would require some additional dependencies and configurations inincluding specific versions of mysql (flyway-compatible)
