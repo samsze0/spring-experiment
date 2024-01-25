@@ -6,6 +6,7 @@
 
 Dependencies:
 - maven
+- gradle
 - docker
 - java
 

@@ -1,0 +1,55 @@
+plugins {
+    id 'org.springframework.boot' version '3.2.2'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '21'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'io.github.cdimascio:java-dotenv:5.2.2'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+	annotationProcessor 'org.projectlombok:lombok:1.18.30'
+	testCompileOnly 'org.projectlombok:lombok:1.18.30'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.flywaydb:flyway-core'
+    implementation 'org.flywaydb:flyway-mysql'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+ext.env = new HashMap()
+
+task loadEnv {
+    doFirst {
+        file('.env').readLines().each {
+            def (key, value) = it.tokenize('=')
+            if (key && value)
+                env.put(key, value)
+        }
+    }
+}
+
+bootRun {
+    dependsOn loadEnv
+    doFirst {
+        env.each { key, value ->
+            environment key, value
+        }
+    }
+}
