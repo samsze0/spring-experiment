@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import com.example.model.User;
 import com.example.repository.IUserRepository;
 
-import java.util.List;
-import java.util.Optional;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Service
 public class UserService {
@@ -19,15 +19,15 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> findAll() {
+    public Flux<User> findAll() {
         return userRepository.findAll();
     }
 
-    public Optional<User> findByName(String name) {
+    public Mono<User> findByName(String name) {
         return userRepository.findByName(name);
     }
 
-    public void save(User user) {
-        userRepository.save(user);
+    public Mono<User> save(User user) {
+        return userRepository.save(user);
     }
 }

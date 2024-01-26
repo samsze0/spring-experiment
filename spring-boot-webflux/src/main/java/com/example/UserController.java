@@ -1,8 +1,5 @@
 package com.example;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -16,6 +13,8 @@ import com.example.model.User;
 import com.example.service.UserService;
 
 import jakarta.validation.Valid;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 public class UserController {
@@ -38,14 +37,12 @@ public class UserController {
     }
 
     @GetMapping("/users/{name}")
-    public ResponseEntity<User> getUserByName(@PathVariable String name) {
-        Optional<User> user = userService.findByName(name);
-        return user.map(ResponseEntity::ok)
-            .orElseGet(() -> ResponseEntity.notFound().build());
+    public Mono<User> getUserByName(@PathVariable String name) {
+        return userService.findByName(name);
     }
     
     @GetMapping("/users")
-    public List<User> getAllUsers() {
+    public Flux<User> getAllUsers() {
         return userService.findAll();
     }
 }

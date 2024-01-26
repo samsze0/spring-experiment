@@ -1,5 +1,7 @@
 package com.example.model;
 
+import org.springframework.data.relational.core.mapping.Table;
+
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -10,6 +12,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@Table("users")
 public class User {
 
     @NotEmpty

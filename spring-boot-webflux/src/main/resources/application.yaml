@@ -5,10 +5,13 @@ management:
       exposure:
         include: health,info,metrics
 spring:
-  datasource:
-    url: jdbc:mysql://${DB_HOST}:3306/${DB_NAME}
+  r2dbc:
+    url: r2dbc:mysql://${DB_HOST}:3306/${DB_NAME}
     username: ${DB_USER}
     password: ${DB_PASSWORD}
   flyway:
+    url: jdbc:mysql://${DB_HOST}:3306/${DB_NAME}
+    user: ${DB_USER}
+    password: ${DB_PASSWORD}
     locations: classpath:/db/migration
     baseline-on-migrate: true

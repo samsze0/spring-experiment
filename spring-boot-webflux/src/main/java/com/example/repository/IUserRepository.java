@@ -1,12 +1,12 @@
 package com.example.repository;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.example.model.User;
 
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
 public interface IUserRepository {
-    public List<User> findAll();
-    public Optional<User> findByName(String name);
-    public void save(User user);
+    public Flux<User> findAll();
+    public Mono<User> findByName(String name);
+    public <S extends User> Mono<S> save(S entity);
 }
