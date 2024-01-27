@@ -5,8 +5,8 @@
 3. Run various provided make scripts to play-test the application
 
 Dependencies:
-- maven
-- gradle
+- maven (optional; use `./mvnw`)
+- gradle (optional; use `./gradlew`)
 - docker
 - java
 
@@ -27,12 +27,11 @@ Topics covered
 - Exception handling
 - Actuators
 - Validation
+- Deployment (pulumi)
 
 Topics yet to be covered
 - Testing
 - Security
-- Deployment (pulumi)
 - JPA (ORM)
 - Logging
 - WebClient (& RestTemplate)
-- WebFlux (in depth)
