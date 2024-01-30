@@ -14,8 +14,8 @@ public class ApiKeyInterceptor implements WebFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
-        boolean validApiKey = exchange.getRequest().getHeaders().containsKey("api-key") &&
-                exchange.getRequest().getHeaders().getFirst("api-key").equals(System.getenv("API_KEY"));
+        String apiKey = exchange.getRequest().getHeaders().getFirst("api-key");
+        boolean validApiKey = apiKey != null && apiKey.equals(System.getenv("API_KEY"));
         if (!validApiKey) {
             ServerHttpResponse response = exchange.getResponse();
             response.setStatusCode(HttpStatus.UNAUTHORIZED); // 401
