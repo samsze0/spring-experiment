@@ -9,7 +9,10 @@ import com.example.filters.InboundLoggingFilter;
 
 @Configuration
 public class AppConfig {
-    public InboundLoggingFilter inboundLoggingFilter = new InboundLoggingFilter();
+    @Bean
+    public InboundLoggingFilter inboundLoggingFilter() {
+        return new InboundLoggingFilter();
+    }
 
     @Bean
     public WebFilter apiKeyInterceptorWrapper() {

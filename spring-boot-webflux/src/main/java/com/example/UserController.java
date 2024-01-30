@@ -1,6 +1,5 @@
 package com.example;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +17,6 @@ import reactor.core.publisher.Mono;
 
 @RestController
 public class UserController {
-
-    @Autowired
     private final UserService userService;
 
     public UserController(UserService userService) {
@@ -27,7 +24,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<?> submitForm(@Valid @RequestBody User user, BindingResult result) {
+    public ResponseEntity<Object> submitForm(@Valid @RequestBody User user, BindingResult result) {
         if (result.hasErrors()) {
             return ResponseEntity.badRequest().body(result.getAllErrors());
         }
@@ -40,7 +37,7 @@ public class UserController {
     public Mono<User> getUserByName(@PathVariable String name) {
         return userService.findByName(name);
     }
-    
+
     @GetMapping("/users")
     public Flux<User> getAllUsers() {
         return userService.findAll();
