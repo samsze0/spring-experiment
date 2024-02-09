@@ -12,7 +12,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Table("users")
+@Table("user")
 public class User {
 
     @NotEmpty

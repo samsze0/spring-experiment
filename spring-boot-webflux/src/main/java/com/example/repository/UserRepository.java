@@ -9,10 +9,12 @@ import com.example.model.User;
 
 import io.r2dbc.spi.Row;
 import io.r2dbc.spi.RowMetadata;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.function.BiFunction;
 
 @Repository
+@Slf4j
 public class UserRepository implements IUserRepository {
 
   private final DatabaseClient databaseClient;
@@ -35,6 +37,8 @@ public class UserRepository implements IUserRepository {
   }
 
   public Mono<User> findByName(String name) {
+    log.debug("Finding user with name {} with UserRepository", name);
+
     String sql = "SELECT * FROM user WHERE name = :name LIMIT 1";
 
     return databaseClient.sql(sql).bind("name", name).map(rowMapper).first();

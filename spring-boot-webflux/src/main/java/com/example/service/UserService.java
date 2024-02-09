@@ -28,4 +28,10 @@ public class UserService {
     public Mono<User> save(User user) {
         return userRepository.save(user);
     }
+
+    public Mono<User> create(User user) {
+        return this.findByName(user.getName())
+                .flatMap(u -> Mono.<User>error(new Exception("User with name " + user.getName() + " already exists")))
+                .switchIfEmpty(Mono.defer(() -> userRepository.save(user)));
+    }
 }
